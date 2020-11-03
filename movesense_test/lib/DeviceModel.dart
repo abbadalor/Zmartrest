@@ -74,7 +74,7 @@ class DeviceModel extends ChangeNotifier {
   void _onNewHrData(String data) {
     Map<String, dynamic> hrData = jsonDecode(data);
     Map<String, dynamic> body = hrData["Body"];
-    double hr = body["rrData"];
+    double hr = body["average"];
     print("rr: ");
     print(body["rrData"]);
     _hrData = hr.toStringAsFixed(1) + " bpm";
