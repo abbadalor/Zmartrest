@@ -25,9 +25,6 @@ class DeviceModel extends ChangeNotifier {
   bool _ledStatus = false;
   bool get ledStatus => _ledStatus;
 
-  String _temperature = "";
-  String get temperature => _temperature;
-
   DeviceModel(this._name, this._serial);
 
   void subscribeToAccelerometer() {
@@ -72,12 +69,12 @@ class DeviceModel extends ChangeNotifier {
   }
 
   void _onNewHrData(String data) {
+    _hrData = "";
     Map<String, dynamic> hrData = jsonDecode(data);
     Map<String, dynamic> body = hrData["Body"];
-    double hr = body["rrData"];
-    print("rr: ");
-    print(body["rrData"]);
-    _hrData = hr.toStringAsFixed(1) + " bpm";
+    double hr = body["average"];
+    int rr = body["rrData"][0];
+    _hrData = _hrData + "bpm: " + hr.toStringAsFixed(0) + " rr: " + rr.toString();
     notifyListeners();
   }
 
@@ -101,17 +98,4 @@ class DeviceModel extends ChangeNotifier {
     );
   }
 
-  void getTemperature() {
-    Mds.get(
-        Mds.createRequestUri(_serial, "/Meas/Temp"),
-        "{}",
-            (data, code) {
-          double kelvin = jsonDecode(data)["Content"]["Measurement"];
-          double temperatureVal = kelvin - 274.15;
-          _temperature = temperatureVal.toStringAsFixed(1) + " C";
-          notifyListeners();
-        },
-            (e, c) => {}
-    );
-  }
 }

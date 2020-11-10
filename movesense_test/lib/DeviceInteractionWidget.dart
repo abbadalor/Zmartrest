@@ -66,7 +66,6 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
                   _accelerometerItem(model),
                   _hrItem(model),
                   _ledItem(model),
-                  _temperatureItem(model)
                 ],
               )
           );
@@ -113,16 +112,4 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
     );
   }
 
-  Widget _temperatureItem(DeviceModel deviceModel) {
-    return Card(
-      child: ListTile(
-        title: Text("Temperature"),
-        subtitle: Text(deviceModel.temperature),
-        trailing: RaisedButton(
-          child: Text("Get"),
-          onPressed: () => deviceModel.getTemperature(),
-        ),
-      ),
-    );
-  }
 }
