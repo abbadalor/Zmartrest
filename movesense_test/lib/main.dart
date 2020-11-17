@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'AppModel.dart';
-import 'package:provider/provider.dart';
+import 'package:movesense_test/screens/login_screen.dart';
 
-import 'ScanPage.dart';
+void main() => runApp(MyApp());
 
-void main() {
-  runApp(
-      ChangeNotifierProvider(
-        create: (context) => AppModel(),
-        child: MaterialApp(
-          home: ScanWidget(),
-        ),
-      )
-  );
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Login UI',
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen(),
+    );
+  }
 }

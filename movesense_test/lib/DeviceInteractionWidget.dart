@@ -24,7 +24,7 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
   void initState() {
     super.initState();
     _appModel = Provider.of<AppModel>(context, listen: false);
-    _appModel.onDeviceMdsDisconnected((device) => { Navigator.pop(context) });
+    _appModel.onDeviceMdsDisconnected((device) => {Navigator.pop(context)});
   }
 
   void _onAccelerometerButtonPressed(DeviceModel deviceModel) {
@@ -68,8 +68,7 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
                   _ledItem(model),
                   _temperatureItem(model)
                 ],
-              )
-          );
+              ));
         },
       ),
     );
@@ -81,7 +80,9 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
         title: Text("Accelerometer"),
         subtitle: Text(deviceModel.accelerometerData),
         trailing: RaisedButton(
-          child: Text(deviceModel.accelerometerSubscribed ? "Unsubscribe" : "Subscribe"),
+          child: Text(deviceModel.accelerometerSubscribed
+              ? "Unsubscribe"
+              : "Subscribe"),
           onPressed: () => _onAccelerometerButtonPressed(deviceModel),
         ),
       ),
@@ -107,7 +108,7 @@ class _DeviceInteractionWidgetState extends State<DeviceInteractionWidget> {
         title: Text("Led"),
         trailing: Switch(
           value: deviceModel.ledStatus,
-          onChanged: (b) => { deviceModel.switchLed() },
+          onChanged: (b) => {deviceModel.switchLed()},
         ),
       ),
     );
