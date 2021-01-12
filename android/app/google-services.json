@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "452830164302",
+    "firebase_url": "https://zmartrest-test.firebaseio.com",
+    "project_id": "zmartrest-test",
+    "storage_bucket": "zmartrest-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452830164302:android:225e390ad4a4a6f2481a1f",
+        "android_client_info": {
+          "package_name": "com.zmartrest.zmartrest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452830164302-fv2ku269vc6n2cb5ngvepjveogc40e5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFDk7pUcN21uokL22LQFO0gjIxC4Lp3XI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452830164302-fv2ku269vc6n2cb5ngvepjveogc40e5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
