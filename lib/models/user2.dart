@@ -5,6 +5,6 @@
   final String lastname;
   final String sex;
 
-  Brew({ this.age, this.name, this.lastname, this.sex });
+  User({ this.age, this.name, this.lastname, this.sex });
 
 }
