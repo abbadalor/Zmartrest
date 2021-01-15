@@ -1,5 +1,6 @@
 import 'package:zmartrest/services/auth.dart';
 import 'package:zmartrest/shared/constants.dart';
+import 'package:zmartrest/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  bool loading = false;
 
   // text field state
   String email = '';
@@ -69,9 +71,11 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () async {
                   if(_formKey.currentState.validate()){
+                    setState(() => loading = true);
                     dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                     if(result == null) {
                       setState(() {
+                        loading = false;
                         error = 'Could not sign in with those credentials';
                       });
                     }

@@ -1,4 +1,5 @@
 import 'package:zmartrest/models/user.dart';
+import 'package:zmartrest/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -46,6 +47,8 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user;
+      // create a new document for the user with the uid
+      await DatabaseService(uid: user.uid).updateUserData(18,'Samuel', 'Olsson', 'male');
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
