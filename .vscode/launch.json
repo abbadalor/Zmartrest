@@ -8,7 +8,8 @@
             "name": "movesense_test",
             "cwd": "movesense_test",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/screens/home/home.dart"
         }
     ]
 }
