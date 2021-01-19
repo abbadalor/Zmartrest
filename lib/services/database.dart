@@ -1,4 +1,5 @@
 import 'package:zmartrest/models/user2.dart';
+import 'package:zmartrest/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -29,6 +30,23 @@ class DatabaseService {
         sugars: doc.data['sex'] ?? ''
       );
     }).toList();
+  }
+
+  // user data from snapshots
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid,
+      age: snapshot.data['age'],
+      name: snapshot.data['name'],
+      lastname: snapshot.data['lastname'],
+      sex: snapshot.data['sex']
+    );
+  }
+
+  // get brews stream
+  Stream<List<User>> get users {
+    return userCollection.snapshots()
+      .map(_userListFromSnapshot);
   }
 
   // get users stream
