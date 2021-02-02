@@ -1,8 +1,8 @@
-import 'package:zmartrest/models/brew2.dart';
+import 'package:zmartrest/models/user2.dart';
 import 'package:zmartrest/screens/home/user_list.dart';
 import 'package:zmartrest/screens/home/settings_form.dart';
 import 'package:zmartrest/services/auth.dart';
-import 'package:brew_crew/services/database.dart';
+import 'package:zmartrest/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
