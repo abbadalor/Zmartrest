@@ -1,5 +1,5 @@
-import 'package:zmartrest/models/user2.dart';
-import 'package:zmartrest/screens/home/user_list.dart';
+import 'package:zmartrest/models/zmartrestuser.dart';
+import 'package:zmartrest/screens/home/zmartrestuser_list.dart';
 import 'package:zmartrest/screens/home/settings_form.dart';
 import 'package:zmartrest/services/auth.dart';
 import 'package:zmartrest/services/database.dart';
@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
       });
     }
 
-    return StreamProvider<List<User>>.value(
+    return StreamProvider<List<ZmartrestUser>>.value(
       value: DatabaseService().users,
       child: Scaffold(
         backgroundColor: Colors.brown[50],
@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: UserList(),
+        body: ZmartrestUserList(),
       ),
     );
   }

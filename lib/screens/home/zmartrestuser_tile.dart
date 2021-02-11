@@ -1,10 +1,10 @@
-import 'package:zmartrest/models/user2.dart';
+import 'package:zmartrest/models/zmartrestuser.dart';
 import 'package:flutter/material.dart';
 
-class UserTile extends StatelessWidget {
+class ZmartrestUserTile extends StatelessWidget {
 
-  final User user;
-  UserTile({ this.user });
+  final ZmartrestUser zmartrestuser;
+  ZmartrestUserTile({ this.zmartrestuser });
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,10 @@ class UserTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 25.0,
-            backgroundColor: Colors.brown[user.strength],
+            backgroundColor: Colors.brown[zmartrestuser.age],
           ),
-          title: Text(user.name),
-          subtitle: Text('${user.age} years old.'),
+          title: Text(zmartrestuser.name),
+          subtitle: Text('${zmartrestuser.age} years old.'),
         ),
       ),
     );

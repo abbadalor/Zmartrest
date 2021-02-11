@@ -1,4 +1,4 @@
-import 'package:zmartrest/models/user2.dart';
+import 'package:zmartrest/models/user.dart';
 import 'package:zmartrest/services/database.dart';
 import 'package:zmartrest/shared/constants.dart';
 import 'package:zmartrest/shared/loading.dart';
@@ -13,7 +13,7 @@ class SettingsForm extends StatefulWidget {
 class _SettingsFormState extends State<SettingsForm> {
 
   final _formKey = GlobalKey<FormState>();
-  final List<String> age = [0, 1, 2, 3, 4];
+  final List<int> age = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   // form values
   int _currentAge;
@@ -24,7 +24,7 @@ class _SettingsFormState extends State<SettingsForm> {
   @override
   Widget build(BuildContext context) {
 
-    User user = Provider.of<User>(context);
+    TheUser user = Provider.of<TheUser>(context);
 
     return StreamBuilder<UserData>(
       stream: DatabaseService(uid: user.uid).userData,

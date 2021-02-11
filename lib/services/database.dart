@@ -1,4 +1,4 @@
-import 'package:zmartrest/models/user2.dart';
+import 'package:zmartrest/models/zmartrestuser.dart';
 import 'package:zmartrest/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,10 +8,10 @@ class DatabaseService {
   DatabaseService({ this.uid });
 
   // collection reference
-  final CollectionReference userCollection = Firestore.instance.collection('users');
+  final CollectionReference zmartrestuserCollection = FirebaseFirestore.instance.collection('zmartrestusers');
 
-  Future<void> updateUserData(int age, String name, String firstName, String sex) async {
-    return await userCollection.document(uid).setData({
+  Future<void> updateUserData(int age, String name, String lastname, String sex) async {
+    return await zmartrestuserCollection.doc(uid).set({
       'age': age,
       'name': name,
       'lastname': lastname,
@@ -19,15 +19,15 @@ class DatabaseService {
     });
   }
 
-  // user list from snapshot
-  List<User> _brewListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc){
+  // zmartuser list from snapshot
+  List<ZmartrestUser> _zmartrestuserListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
       //print(doc.data);
-      return User(
-        age: doc.data['age'] ?? 0,
-        name: doc.data['name'] ?? '',
-        lastname: doc.data['lastname'] ?? '',
-        sugars: doc.data['sex'] ?? ''
+      return ZmartrestUser(
+        age: doc.data()['age'] ?? 0,
+        name: doc.data()['name'] ?? '',
+        lastname: doc.data()['lastname'] ?? '',
+        sex: doc.data()['sex'] ?? ''
       );
     }).toList();
   }
@@ -36,22 +36,22 @@ class DatabaseService {
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(
       uid: uid,
-      age: snapshot.data['age'],
-      name: snapshot.data['name'],
-      lastname: snapshot.data['lastname'],
-      sex: snapshot.data['sex']
+      age: snapshot.data()['age'],
+      name: snapshot.data()['name'],
+      lastname: snapshot.data()['lastname'],
+      sex: snapshot.data()['sex']
     );
   }
 
   // get users stream
-  Stream<List<User>> get users {
-    return userCollection.snapshots()
-      .map(_userListFromSnapshot);
+  Stream<List<ZmartrestUser>> get users {
+    return zmartrestuserCollection.snapshots()
+      .map(_zmartrestuserListFromSnapshot);
   }
 
   // get user doc stream
   Stream<UserData> get userData {
-    return userCollection.document(uid).snapshots()
+    return zmartrestuserCollection.doc(uid).snapshots()
       .map(_userDataFromSnapshot);
   }
 
