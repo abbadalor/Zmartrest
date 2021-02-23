@@ -1,6 +1,5 @@
 import 'package:zmartrest/services/auth.dart';
 import 'package:zmartrest/shared/constants.dart';
-import 'package:zmartrest/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
