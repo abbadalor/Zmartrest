@@ -39,44 +39,56 @@ class _LoginState extends State<Login> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0,
+                        color: mainColor,
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 50),
-                Text(
-                  'Email',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.5,
-                    color: mainColor,
-                  ),
-                ),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: 'Your email address',
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
                 SizedBox(height: 15),
-                Text(
-                  'Password',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.5,
-                    color: mainColor,
-                  ),
-                ),
                 TextFormField(
                   obscureText: _isHidden,
                   decoration: InputDecoration(
-                    hintText: 'Your password',
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                     suffix: InkWell(
                       onTap: _togglePasswordView,
                       child: Icon(
                         _isHidden ? Icons.visibility : Icons.visibility_off,
+                        color: mainColor,
                       ),
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Text(
+                          "Forgot password?",
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 30),
                 FlatButton(
@@ -93,6 +105,31 @@ class _LoginState extends State<Login> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   onPressed: () {},
+                ),
+                SizedBox(height: 100),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            fontSize: 12.5,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            " Sign up",
+                            style: TextStyle(
+                                fontSize: 12.5, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
