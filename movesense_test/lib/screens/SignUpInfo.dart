@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignUpInfo extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpInfoState createState() => _SignUpInfoState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpInfoState extends State<SignUpInfo> {
   Color mainColor = Color(0xff195670);
-  bool _isHidden = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,23 +19,11 @@ class _LoginState extends State<Login> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 30.0, 0, 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset(
-                          'assets/hrv.png',
-                          width: 280,
-                          height: 200,
-                        ),
-                      ],
-                    ),
-                  ),
+                  SizedBox(height: 100),
                   Row(
                     children: <Widget>[
                       Text(
-                        'Sign In',
+                        'Sign Up',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25.0,
@@ -44,10 +32,10 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 100),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Email',
+                      labelText: 'Firstname',
                       labelStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -56,44 +44,28 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
-                    obscureText: _isHidden,
                     decoration: InputDecoration(
-                      labelText: 'Password',
+                      labelText: 'Lastname',
                       labelStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),
-                      suffix: InkWell(
-                        onTap: _togglePasswordView,
-                        child: Icon(
-                          _isHidden ? Icons.visibility : Icons.visibility_off,
-                          color: mainColor,
-                        ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Confirm password',
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "Forgot password?",
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 155),
+                  SizedBox(height: 200),
                   FlatButton(
                     child: Text(
-                      'Sign in',
+                      'Continue',
                       style: TextStyle(
                         fontSize: 17.5,
                       ),
@@ -114,7 +86,7 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Don't have an account?",
+                            "Have an account?",
                             style: TextStyle(
                               fontSize: 12.5,
                             ),
@@ -122,7 +94,7 @@ class _LoginState extends State<Login> {
                           InkWell(
                             onTap: () {},
                             child: Text(
-                              " Sign up",
+                              " Sign In",
                               style: TextStyle(
                                   fontSize: 12.5, fontWeight: FontWeight.bold),
                             ),
@@ -138,11 +110,5 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-  }
-
-  void _togglePasswordView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
   }
 }

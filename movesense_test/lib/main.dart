@@ -3,8 +3,11 @@ import 'AppModel.dart';
 import 'package:provider/provider.dart';
 
 import 'ScanPage.dart';
-import 'screens/login.dart';
-import 'screens/home.dart';
+import 'screens/Login.dart';
+import 'screens/Home.dart';
+import 'screens/SignUp.dart';
+import 'screens/SignUpInfo.dart';
+import 'screens/Test.dart';
 
 Color mainColor = Color(0xff195670);
 void main() {
@@ -16,7 +19,10 @@ void main() {
       ),
       //home: ScanWidget(),
       //home: Login(),
-      home: Home(),
+      home: SignUp(),
+      //home: SignUpInfo(),
+      //home: Home(),
+      //home: MyHomePage(),
     ),
   ));
 }
