@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movesense_test/screens/SignUpInfo.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(40.0, 0, 40.0, 0),
+          padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
           child: Form(
             child: SingleChildScrollView(
               child: Column(
@@ -52,6 +53,7 @@ class _LoginState extends State<Login> {
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),
+                      suffix: SizedBox(height: 24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -90,7 +92,7 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 155),
+                  SizedBox(height: 121),
                   FlatButton(
                     child: Text(
                       'Sign in',
@@ -116,15 +118,17 @@ class _LoginState extends State<Login> {
                           Text(
                             "Don't have an account?",
                             style: TextStyle(
-                              fontSize: 12.5,
+                              fontSize: 15,
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, '/SignUpInfo');
+                            },
                             child: Text(
                               " Sign up",
                               style: TextStyle(
-                                  fontSize: 12.5, fontWeight: FontWeight.bold),
+                                  fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],

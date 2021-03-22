@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movesense_test/screens/Login.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -12,14 +13,15 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(40.0, 0, 40.0, 0),
+          padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
           child: Form(
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 100),
+                  SizedBox(height: 100 - kToolbarHeight),
                   Row(
                     children: <Widget>[
                       Text(
@@ -40,6 +42,7 @@ class _SignUpState extends State<SignUp> {
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),
+                      suffix: SizedBox(height: 24),
                     ),
                   ),
                   SizedBox(height: 15),
@@ -78,10 +81,10 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 184),
+                  SizedBox(height: 150),
                   FlatButton(
                     child: Text(
-                      'Continue',
+                      'Sign Up',
                       style: TextStyle(
                         fontSize: 17.5,
                       ),
@@ -94,31 +97,12 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(10)),
                     onPressed: () {},
                   ),
-                  SizedBox(height: 15),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Have an account?",
-                            style: TextStyle(
-                              fontSize: 12.5,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(
-                              " Sign In",
-                              style: TextStyle(
-                                  fontSize: 12.5, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  SizedBox(height: 6),
+                  /*IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),*/
                 ],
               ),
             ),
