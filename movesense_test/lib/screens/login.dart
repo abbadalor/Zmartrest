@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movesense_test/screens/SignUpInfo.dart';
+import 'package:movesense_test/services/auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +10,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   Color mainColor = Color(0xff195670);
   bool _isHidden = true;
+  bool noUser = false;
+  bool wrongPassword = false;
+  bool usedEmail = false;
+  bool weakPassword = false;
+  final AuthService _auth = AuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +26,7 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
           child: Form(
+            key: _formKey,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -47,6 +57,17 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 50),
                   TextFormField(
+                    controller: _emailController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "E-mail can't be empty";
+                      } else if (noUser) {
+                        return "No user found for that email";
+                      } else if (usedEmail) {
+                        return "That E-mail is already in use";
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
@@ -58,6 +79,17 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 15),
                   TextFormField(
+                    controller: _passwordController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Password can't be empty";
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 characters long';
+                      } else if (wrongPassword) {
+                        return "Incorrect password";
+                      }
+                      return null;
+                    },
                     obscureText: _isHidden,
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -94,20 +126,41 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(height: 121),
                   FlatButton(
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        fontSize: 17.5,
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                          fontSize: 17.5,
+                        ),
                       ),
-                    ),
-                    color: mainColor,
-                    textColor: Colors.white,
-                    minWidth: double.infinity,
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    onPressed: () {},
-                  ),
+                      color: mainColor,
+                      textColor: Colors.white,
+                      minWidth: double.infinity,
+                      height: 50,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          print(_emailController.text +
+                              ' ' +
+                              _passwordController.text);
+                          dynamic result = await _auth.signIn(
+                              _emailController.text.replaceAll(' ', ''),
+                              _passwordController.text.replaceAll(' ', ''));
+                          if (result == 'NoUser') {
+                            noUser = true;
+                            _formKey.currentState.validate();
+                            noUser = false;
+                          } else if (result == 'WrongPass') {
+                            wrongPassword = true;
+                            _formKey.currentState.validate();
+                            wrongPassword = false;
+                          } else {
+                            print('signed in');
+                            print(result);
+                            Navigator.pushNamed(context, '/Home');
+                          }
+                        }
+                      }),
                   SizedBox(height: 15),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
