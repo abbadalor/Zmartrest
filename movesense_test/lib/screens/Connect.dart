@@ -1,21 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:async';
-import 'Device.dart';
-import 'DeviceConnectionStatus.dart';
-import 'DeviceInteractionWidget.dart';
-import 'AppModel.dart';
+import 'package:movesense_test/Device.dart';
+import 'package:movesense_test/DeviceConnectionStatus.dart';
+import 'package:movesense_test/screens/Home.dart';
+import 'package:movesense_test/AppModel.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-class ScanWidget extends StatefulWidget {
+class Connect extends StatefulWidget {
   @override
-  _ScanWidgetState createState() => _ScanWidgetState();
+  _ConnectState createState() => _ConnectState();
 }
 
-class _ScanWidgetState extends State<ScanWidget> {
-
+class _ConnectState extends State<Connect> {
   AppModel model;
+  Color mainColor = Color(0xff195670);
 
   @override
   void initState() {
@@ -24,11 +24,12 @@ class _ScanWidgetState extends State<ScanWidget> {
     model = Provider.of<AppModel>(context, listen: false);
     model.onDeviceMdsConnected((device) => {
       Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          DeviceInteractionWidget(device)
+          Home(device)
       ))
     });
   }
 
+  
   Future<void> initPlatformState() async {
     if (!mounted) return;
 
@@ -42,12 +43,13 @@ class _ScanWidgetState extends State<ScanWidget> {
       );
     }
   }
+  
 
   Widget _buildDeviceItem(BuildContext context, int index) {
     return Card(
       child: ListTile(
         title: Text(model.deviceList[index].name),
-        subtitle: Text(model.deviceList[index].address),
+        // subtitle: Text(model.deviceList[index].address),
         trailing: Text(model.deviceList[index].connectionStatus.statusName),
         onTap: () => model.connectToDevice(model.deviceList[index]),
       ),
@@ -73,28 +75,42 @@ class _ScanWidgetState extends State<ScanWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Movesense Sensor'),
-        centerTitle: true,
-        backgroundColor: Colors.red[800],
-      ),
+      resizeToAvoidBottomPadding: false,
       body: Consumer<AppModel>(
         builder: (context, model, child) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              RaisedButton(
-                onPressed: onScanButtonPressed,
-                color: Colors.grey[700],
-                child: Text(model.scanButtonText),
+            children:
+              [
+                Image.asset(
+                  'assets/hrv.png',
+                  width: 200,
+                  height: 200,
+                ),
+                Text(
+                'Connect to a sensor',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Colors.grey[700],
+                ),
               ),
-              _buildDeviceList(model.deviceList)
+                _buildDeviceList(model.deviceList),
+                RaisedButton(
+                  onPressed: onScanButtonPressed,
+                  color: Colors.white,
+                  textColor: mainColor,
+                  child: Text(model.scanButtonText),
+                  shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
+                ),
+                SizedBox(height: 10),
             ],
           );
         },
       ),
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.white,
+      appBar: AppBar(),
     );
   }
 }

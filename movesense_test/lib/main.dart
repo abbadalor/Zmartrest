@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'AppModel.dart';
 import 'package:provider/provider.dart';
-import 'ScanPage.dart';
 import 'screens/Login.dart';
-import 'screens/Home.dart';
+import 'screens/Connect.dart';
 import 'screens/SignUp.dart';
 import 'screens/SignUpInfo.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -44,18 +42,18 @@ class App extends StatelessWidget {
                     iconTheme: IconThemeData(color: Colors.black),
                   ),
                 ),
-                initialRoute: '/Home',
+                initialRoute: '/Connect',
                 routes: {
                   '/': (context) => Login(),
                   '/SignUpInfo': (context) => SignUpInfo(),
                   '/SignUp': (context) => SignUp(),
-                  '/Home': (context) => Home(),
+                  '/Connect': (context) => Connect(),
                 }
-                //home: ScanWidget(),
-                //home: Login(),
-                //home: SignUp(),
-                //home: SignUpInfo(),
-                //home: Home(),
+                //Connect: ScanWidget(),
+                //Connect: Login(),
+                //Connect: SignUp(),
+                //Connect: SignUpInfo(),
+                //Connect: Connect(),
                 ),
           ));
         }

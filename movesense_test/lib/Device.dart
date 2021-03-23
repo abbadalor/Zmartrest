@@ -1,6 +1,4 @@
-
 import 'DeviceConnectionStatus.dart';
-import 'DeviceModel.dart';
 
 class Device {
   String _address;

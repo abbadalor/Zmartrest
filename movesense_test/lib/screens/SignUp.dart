@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movesense_test/screens/Login.dart';
+// import 'package:movesense_test/screens/Login.dart';
 import 'package:movesense_test/services/auth.dart';
 
 class SignUp extends StatefulWidget {
@@ -146,7 +146,7 @@ class _SignUpState extends State<SignUp> {
                           } else {
                             print('signed in');
                             print(result);
-                            Navigator.pushNamed(context, '/Home');
+                            Navigator.pushNamed(context, '/Connect');
                           }
                         }
                       }),

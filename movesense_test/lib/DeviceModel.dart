@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
 
-import 'dart:developer' as developer;
+// import 'dart:developer' as developer;
 
 class DeviceModel extends ChangeNotifier {
   String _serial;
