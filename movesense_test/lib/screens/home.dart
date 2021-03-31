@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../DeviceModel.dart';
 import 'package:provider/provider.dart';
+// import '../PlaceholderWidget.dart';
 
 import '../Device.dart';
 
@@ -21,6 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   AppModel _appModel;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -54,77 +56,134 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Device device = widget.device;
+
     return ChangeNotifierProvider(
       create: (context) => DeviceModel(device.name, device.serial),
       child: Consumer<DeviceModel>(
         builder: (context, model, child) {
+          final List<Widget> _children = [
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 100.0,
+                  child: _accelerometerItem(model),
+                ),
+                SizedBox(
+                  height: 100.0,
+                  child: _hrItem(model),
+                ),
+                SizedBox(
+                  height: 100.0,
+                  child: _ledItem(model),
+                ),
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Text(
+                  'Notifications',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                    color: mainColor,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Text(
+                  'Profile',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                    color: mainColor,
+                  ),
+                ),
+              ],
+            )
+          ];
           return Scaffold(
-              appBar: AppBar(
-                title: Text(device.name),
-                leading: IconButton(icon: Icon(Icons.menu),
+            appBar: AppBar(
+              title: Text(device.name),
+              leading: IconButton(
+                icon: Icon(Icons.menu),
                 onPressed: () => Scaffold.of(context).openDrawer(),
-                ),
-                ),
-              floatingActionButton: ButtonTheme(
-                  minWidth: 100.0,
-                  height: 40.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  child: RaisedButton(
-                    child: Text(
-                      "Disconnect",
-                      style: TextStyle(color: mainColor),
-                      ),
-                    color: Colors.white,
-                  onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-              backgroundColor: Colors.white,
-              bottomNavigationBar: BottomNavigationBar(
-                currentIndex: 0, // this will be set when a new tab is tapped
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home,
-                    ),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.mail,
-                    ),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.person,
-                    ),
-                    label: '',
-                  ),
-                ],
               ),
-              body: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _accelerometerItem(model),
-                  _hrItem(model),
-                  _ledItem(model),
-                  // _temperatureItem(model)
-                ],
-              ));
+            ),
+            floatingActionButton: ButtonTheme(
+              minWidth: 100.0,
+              height: 40.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: RaisedButton(
+                child: Text(
+                  "Disconnect",
+                  style: TextStyle(color: mainColor),
+                ),
+                color: Colors.white,
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+            backgroundColor: Colors.white,
+            body: _children[_currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: _currentIndex,
+              onTap: onTabTapped,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.mail,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  label: '',
+                ),
+              ],
+            ),
+            // body: Column(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: <Widget>[
+            //     _accelerometerItem(model),
+            //     _hrItem(model),
+            //     _ledItem(model),
+            //     // _temperatureItem(model)
+            //   ],
+            // ),
+          );
         },
       ),
     );
   }
 
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   Widget _accelerometerItem(DeviceModel deviceModel) {
     String xyz = "";
     try {
-      xyz = deviceModel.accelerometerData.split("\n")[0] + " " + deviceModel.accelerometerData.split("\n")[1] + " "+ deviceModel.accelerometerData.split("\n")[2];
+      xyz = deviceModel.accelerometerData.split("\n")[0] +
+          " " +
+          deviceModel.accelerometerData.split("\n")[1] +
+          " " +
+          deviceModel.accelerometerData.split("\n")[2];
       // xyz = deviceModel.accelerometerData;
-    }
-    on RangeError catch(e) {
+    } on RangeError catch (e) {
       xyz = "";
     }
     return Card(
@@ -139,20 +198,19 @@ class _HomeState extends State<Home> {
             Icons.directions_run_rounded,
             color: Colors.white,
             size: 35,
-        ),
           ),
+        ),
         title: Text(
           "Accelerometer",
           style: TextStyle(color: Colors.white),
         ),
         subtitle: Text(
           xyz,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14),
+          style: TextStyle(color: Colors.white, fontSize: 14),
         ),
         trailing: RaisedButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: Text(deviceModel.accelerometerSubscribed
               ? "Stop measuring"
               : "Start measuring"),
@@ -166,8 +224,7 @@ class _HomeState extends State<Home> {
     String bpm = "";
     try {
       bpm = "BPM: " + deviceModel.hrData.split(" ")[1];
-    }
-    on RangeError catch(e) {
+    } on RangeError catch (e) {
       bpm = "";
     }
     return Card(
@@ -182,7 +239,7 @@ class _HomeState extends State<Home> {
             Icons.favorite,
             color: Colors.white,
             size: 35,
-        ),
+          ),
         ),
         title: Text(
           "Heart rate",
@@ -190,13 +247,13 @@ class _HomeState extends State<Home> {
         ),
         subtitle: Text(
           bpm,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14),
+          style: TextStyle(color: Colors.white, fontSize: 14),
         ),
         trailing: RaisedButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Text(deviceModel.hrSubscribed ? "Stop measuring" : "Start measuring"),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: Text(
+              deviceModel.hrSubscribed ? "Stop measuring" : "Start measuring"),
           onPressed: () => _onHrButtonPressed(deviceModel),
         ),
       ),
@@ -216,7 +273,7 @@ class _HomeState extends State<Home> {
             Icons.highlight,
             color: Colors.white,
             size: 35,
-        ),
+          ),
         ),
         title: Text(
           "Led",
@@ -228,11 +285,9 @@ class _HomeState extends State<Home> {
           activeTrackColor: Colors.white,
           activeColor: Colors.white,
         ),
-        // trailing: IconButton(icon: Icon(Icons.menu),
       ),
     );
   }
-
 
 //   Widget _temperatureItem(DeviceModel deviceModel) {
 //     return Card(
