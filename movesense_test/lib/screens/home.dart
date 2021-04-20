@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:movesense_test/screens/Feedback.dart';
 import '../DeviceModel.dart';
 import 'package:provider/provider.dart';
 // import '../PlaceholderWidget.dart';
-
+import 'NavDrawer.dart';
+import 'Excercise.dart';
+import 'Eval.dart';
 import '../Device.dart';
-
 import '../AppModel.dart';
 
 Color mainColor = Color(0xff195670);
@@ -62,6 +64,7 @@ class _HomeState extends State<Home> {
       child: Consumer<DeviceModel>(
         builder: (context, model, child) {
           final List<Widget> _children = [
+            //WIDGETS:
             Column(
               children: <Widget>[
                 SizedBox(
@@ -80,37 +83,24 @@ class _HomeState extends State<Home> {
             ),
             Column(
               children: <Widget>[
-                Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                    color: mainColor,
-                  ),
+                SizedBox(
+                  height: 100.0,
+                  child: Excercise(),
                 ),
               ],
             ),
             Column(
               children: <Widget>[
-                Text(
-                  'Profile',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                    color: mainColor,
-                  ),
+                SizedBox(
+                  height: 100.0,
+                  child: Eval(),
                 ),
               ],
-            )
+            ),
           ];
           return Scaffold(
-            appBar: AppBar(
-              title: Text(device.name),
-              leading: IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-            ),
+            appBar: AppBar(),
+            drawer: NavDrawer(),
             floatingActionButton: ButtonTheme(
               minWidth: 100.0,
               height: 40.0,
@@ -141,27 +131,18 @@ class _HomeState extends State<Home> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.mail,
+                    Icons.directions_run_rounded,
                   ),
                   label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.person,
+                    Icons.autorenew_rounded,
                   ),
                   label: '',
                 ),
               ],
             ),
-            // body: Column(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: <Widget>[
-            //     _accelerometerItem(model),
-            //     _hrItem(model),
-            //     _ledItem(model),
-            //     // _temperatureItem(model)
-            //   ],
-            // ),
           );
         },
       ),
