@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:movesense_test/screens/Login.dart';
 import 'package:movesense_test/services/auth.dart';
+import 'package:movesense_test/services/data.dart';
+import 'package:movesense_test/services/library.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   bool usedEmail = false;
   bool weakPassword = false;
   final AuthService _auth = AuthService();
+  final DataService _data = DataService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -113,7 +116,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 150),
+                  SizedBox(height: 214),
                   FlatButton(
                       child: Text(
                         'Sign Up',
@@ -144,6 +147,7 @@ class _SignUpState extends State<SignUp> {
                             _formKey.currentState.validate();
                             usedEmail = false;
                           } else {
+                            await _data.userDataAdd(fullname, birthdate, sex);
                             print('signed in');
                             print(result);
                             Navigator.pushNamed(context, '/Connect');

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gender_picker/source/enums.dart';
+import 'package:gender_picker/source/gender_picker.dart';
+import 'package:movesense_test/services/library.dart';
 
 class SignUpInfo extends StatefulWidget {
   @override
@@ -9,7 +12,10 @@ class SignUpInfo extends StatefulWidget {
 class _SignUpInfoState extends State<SignUpInfo> {
   Color mainColor = Color(0xff195670);
   DateTime selectedDate = DateTime.now();
-  final TextEditingController _textEditingController = TextEditingController();
+  String chosenGender = "";
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _birthController = TextEditingController();
+  final TextEditingController _sexController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +41,9 @@ class _SignUpInfoState extends State<SignUpInfo> {
                   ),
                   SizedBox(height: 100),
                   TextFormField(
+                    controller: _nameController,
                     decoration: InputDecoration(
-                      labelText: 'Firstname',
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                      suffix: SizedBox(height: 24),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Lastname',
+                      labelText: 'Fullname',
                       labelStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -60,10 +56,10 @@ class _SignUpInfoState extends State<SignUpInfo> {
                     onTap: () => _selectDate(context),
                     child: AbsorbPointer(
                       child: TextField(
-                        controller: _textEditingController,
+                        controller: _birthController,
                         decoration: InputDecoration(
                           labelText: 'Birthdate',
-                          //_textEditingController.txt = "${selectedDate.toLocal()}".split(' ')[0],
+                          //_birthController.txt = "${selectedDate.toLocal()}".split(' ')[0],
                           //"${selectedDate.toLocal()}".split(' ')[0],
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -74,7 +70,20 @@ class _SignUpInfoState extends State<SignUpInfo> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 150),
+                  SizedBox(height: 15),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Biological gender',
+                      border: InputBorder.none,
+                      labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                      suffix: SizedBox(height: 24),
+                    ),
+                  ),
+                  getWidget(false, true),
+                  SizedBox(height: 50),
                   FlatButton(
                     child: Text(
                       'Continue',
@@ -89,7 +98,16 @@ class _SignUpInfoState extends State<SignUpInfo> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     onPressed: () {
+                      fullname = _nameController.text;
+                      birthdate = _birthController.text;
+                      if (chosenGender == "Gender.Male") {
+                        sex = "male";
+                      } else if (chosenGender == "Gender.Female") {
+                        sex = "female";
+                      }
+                      sex = _sexController.text;
                       Navigator.pushNamed(context, '/SignUp');
+                      print(chosenGender);
                     },
                   ),
                   SizedBox(height: 15),
@@ -124,6 +142,34 @@ class _SignUpInfoState extends State<SignUpInfo> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget getWidget(bool showOtherGender, bool alignVertical) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(50.0, 0, 0, 0),
+      alignment: Alignment.center,
+      child: GenderPickerWithImage(
+        showOtherGender: showOtherGender,
+        verticalAlignedText: alignVertical,
+        selectedGender: Gender.Male,
+        selectedGenderTextStyle:
+            TextStyle(color: Color(0xFF8b32a8), fontWeight: FontWeight.bold),
+        unSelectedGenderTextStyle:
+            TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+        onChanged: (Gender gender) {
+          print(chosenGender = gender.toString());
+        },
+        //Alignment between icons
+        equallyAligned: true,
+
+        animationDuration: Duration(milliseconds: 300),
+        isCircular: true,
+        // default : true,
+        opacityOfGradient: 0.4,
+        padding: const EdgeInsets.all(3),
+        size: 60, //default : 40
       ),
     );
   }
@@ -170,7 +216,7 @@ class _SignUpInfoState extends State<SignUpInfo> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        _textEditingController.text = "${selectedDate.toLocal()}".split(' ')[0];
+        _birthController.text = "${selectedDate.toLocal()}".split(' ')[0];
       });
   }
 
@@ -188,7 +234,7 @@ class _SignUpInfoState extends State<SignUpInfo> {
                 if (picked != null && picked != selectedDate)
                   setState(() {
                     selectedDate = picked;
-                    _textEditingController.text =
+                    _birthController.text =
                         "${selectedDate.toLocal()}".split(' ')[0];
                   });
               },
