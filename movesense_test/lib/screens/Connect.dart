@@ -86,7 +86,7 @@ class _ConnectState extends State<Connect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       body: Consumer<AppModel>(
         builder: (context, model, child) {
           return Column(

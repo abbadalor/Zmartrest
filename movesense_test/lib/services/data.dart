@@ -1,19 +1,29 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movesense_test/services/library.dart';
 
-class DataService {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+class DataService {
+
+  final fb = FirebaseDatabase.instance;
+
+
+  //CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   Future userDataAdd(String fullname, String birthdate, String sex) async {
-    return users
-        .doc(userID)
-        .set({'fullname': "Adam", 'birthdate': "20/09-2012", 'sex': "male"})
-        //.set({'fullname': fullname, 'birthdate': birthdate, 'sex': sex})
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+    final ref = fb.reference();
+    ref.child('Users').child(userID).child('FullName').set(fullname);
+    ref.child('Users').child(userID).child('Birthdate').set(birthdate);
+    ref.child('Users').child(userID).child('Sex').set(sex);
+    //return users
+    //    .doc(userID)
+    //    .set({
+    //  'name': name,
+    //  'lastname': lastname,
+    //  'age': age,
+    //  'sex': sex
+    //})
+    //.then((value) => print("User Added"))
+    //.catchError((error) => print("Failed to add user: $error"));
   }
 }
