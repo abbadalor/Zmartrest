@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
 
+import 'package:movesense_test/services/library.dart';
+import 'package:movesense_test/services/data.dart';
+
 // import 'dart:developer' as developer;
 
 class DeviceModel extends ChangeNotifier {
@@ -28,7 +31,12 @@ class DeviceModel extends ChangeNotifier {
   String _temperature = "";
   String get temperature => _temperature;
 
+  int _time = 0;
+  int get time => _time;
+
   DeviceModel(this._name, this._serial);
+
+  final DataService _data = DataService();
 
   void subscribeToAccelerometer() {
     _accelerometerData = "";
@@ -74,14 +82,23 @@ class DeviceModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _onNewHrData(String data) {
+  void _onNewHrData(String data) async{
+    await getTime();
     _hrData = "";
     Map<String, dynamic> hrData = jsonDecode(data);
     Map<String, dynamic> body = hrData["Body"];
     double hr = body["average"];
-    int rr = body["rrData"][0];
+    //int rr = body["rrData"][0];
+    Map<String,int> rrMap = { "rr" : body["rrData"][0],
+                            "time" : time};
+    rrList.add(rrMap);
+    //print(rrList.toString());
+    print("Here is the data");
+    print(rrList.toString());
+    _data.rrDataAdd();
     _hrData =
-        _hrData + "bpm: " + hr.toStringAsFixed(0) + " rr: " + rr.toString();
+        _hrData + "bpm: " + hr.toStringAsFixed(0) + " rr: " + rrList[0].toString();
+
     notifyListeners();
   }
 
@@ -107,6 +124,13 @@ class DeviceModel extends ChangeNotifier {
       double kelvin = jsonDecode(data)["Content"]["Measurement"];
       double temperatureVal = kelvin - 274.15;
       _temperature = temperatureVal.toStringAsFixed(1) + " C";
+      notifyListeners();
+    }, (e, c) => {});
+  }
+
+  void getTime() {
+    Mds.get(Mds.createRequestUri(_serial, "/Time"), "{}", (data, code) {
+      _time = jsonDecode(data)["Content"];
       notifyListeners();
     }, (e, c) => {});
   }

@@ -26,4 +26,12 @@ class DataService {
     //.then((value) => print("User Added"))
     //.catchError((error) => print("Failed to add user: $error"));
   }
+
+  Future rrDataAdd() async {
+    final ref = fb.reference();
+    var date = DateTime.fromMicrosecondsSinceEpoch(rrList.last["time"]);
+    var newdate = date.toString().replaceAll(".", "'");
+    print(date);
+    ref.child('Users').child(userID).child("rrData").child(newdate).set(rrList.last["rr"].toString());
+  }
 }

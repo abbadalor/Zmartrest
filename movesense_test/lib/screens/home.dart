@@ -204,7 +204,7 @@ class _HomeState extends State<Home> {
   Widget _hrItem(DeviceModel deviceModel) {
     String bpm = "";
     try {
-      bpm = "BPM: " + deviceModel.hrData.split(" ")[1];
+      bpm = "BPM: " + deviceModel.hrData.split(" ")[3];
     } on RangeError catch (e) {
       bpm = "";
     }
