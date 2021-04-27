@@ -75,7 +75,7 @@ class DeviceModel extends ChangeNotifier {
     _hrSubscription = Mds.subscribe(
         Mds.createSubscriptionUri(_serial, "/Meas/HR"),
         "{}",
-        (d, c) => {},
+        (d, c) => {putTime()},
         (e, c) => {},
         (data) => _onNewHrData(data),
         (e, c) => {});
@@ -138,7 +138,7 @@ class DeviceModel extends ChangeNotifier {
   }
 
   void putTime() {
-    Mds.put(Mds.createRequestUri(_serial, "/Time"), '{"value":${realTime}', (data, code) {
+    Mds.put(Mds.createRequestUri(_serial, "/Time"), '{"value":${realTime}}', (data, code) {
     }, (e, c) => {});
   }
 }
