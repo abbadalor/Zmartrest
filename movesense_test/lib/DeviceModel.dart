@@ -36,6 +36,8 @@ class DeviceModel extends ChangeNotifier {
 
   DeviceModel(this._name, this._serial);
 
+  String realTime = DateTime.now().microsecondsSinceEpoch.toString();
+
   final DataService _data = DataService();
 
   void subscribeToAccelerometer() {
@@ -132,6 +134,11 @@ class DeviceModel extends ChangeNotifier {
     Mds.get(Mds.createRequestUri(_serial, "/Time"), "{}", (data, code) {
       _time = jsonDecode(data)["Content"];
       notifyListeners();
+    }, (e, c) => {});
+  }
+
+  void putTime() {
+    Mds.put(Mds.createRequestUri(_serial, "/Time"), '{"value":${realTime}', (data, code) {
     }, (e, c) => {});
   }
 }
