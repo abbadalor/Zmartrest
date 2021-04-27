@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
-import 'package:movesense_test/Device.dart';
-import 'package:movesense_test/DeviceConnectionStatus.dart';
+import 'package:movesense_test/Components/Device.dart';
+import 'package:movesense_test/Components/DeviceConnectionStatus.dart';
 import 'package:movesense_test/screens/Home.dart';
-import 'package:movesense_test/AppModel.dart';
+import 'package:movesense_test/Components/AppModel.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:movesense_test/screens/Login.dart';
-import 'package:movesense_test/services/auth.dart';
-import 'package:movesense_test/services/data.dart';
-import 'package:movesense_test/services/library.dart';
+import 'package:movesense_test/services/Auth.dart';
+import 'package:movesense_test/services/Data.dart';
+import 'package:movesense_test/services/Library.dart';
 
 class SignUp extends StatefulWidget {
   @override

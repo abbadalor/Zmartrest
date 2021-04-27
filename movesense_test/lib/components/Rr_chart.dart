@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'rr_series.dart';
+import 'Rr_series.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class RrChart extends StatelessWidget {
-  final List<RrSeries> data;
+  final List<RmssdSeries> data;
   RrChart({@required this.data});
   @override
   Widget build(BuildContext context) {
-    List<charts.Series<RrSeries, String>> series = [
+    List<charts.Series<RmssdSeries, String>> series = [
       charts.Series(
         id: "rr",
         data: data,
-        domainFn: (RrSeries series, _) => series.time,
-        measureFn: (RrSeries series, _) => series.rr,
-        colorFn: (RrSeries series, _) => series.barColor,
+        domainFn: (RmssdSeries series, _) => series.time,
+        measureFn: (RmssdSeries series, _) => series.rmssd,
+        colorFn: (RmssdSeries series, _) => series.barColor,
       ),
     ];
     return Container(

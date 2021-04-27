@@ -1,6 +1,4 @@
-
 import 'dart:collection';
-
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'Device.dart';
@@ -8,13 +6,13 @@ import 'package:mdsflutter/Mds.dart';
 import 'DeviceConnectionStatus.dart';
 
 class AppModel extends ChangeNotifier {
-
   final Set<Device> _deviceList = Set();
   bool _isScanning = false;
   void Function(Device) _onDeviceMdsConnectedCb;
   void Function(Device) _onDeviceDisonnectedCb;
 
-  UnmodifiableListView<Device> get deviceList => UnmodifiableListView(_deviceList);
+  UnmodifiableListView<Device> get deviceList =>
+      UnmodifiableListView(_deviceList);
 
   bool get isScanning => _isScanning;
 
@@ -62,11 +60,11 @@ class AppModel extends ChangeNotifier {
 
   void connectToDevice(Device device) {
     device.onConnecting();
-    Mds.connect(device.address,
-            (serial) => _onDeviceMdsConnected(device.address, serial),
-            () => _onDeviceDisconnected(device.address),
-            () => _onDeviceConnectError(device.address)
-    );
+    Mds.connect(
+        device.address,
+        (serial) => _onDeviceMdsConnected(device.address, serial),
+        () => _onDeviceDisconnected(device.address),
+        () => _onDeviceConnectError(device.address));
   }
 
   void disconnectFromDevice(Device device) {
@@ -75,7 +73,8 @@ class AppModel extends ChangeNotifier {
   }
 
   void _onDeviceMdsConnected(String address, String serial) {
-    Device foundDevice = _deviceList.firstWhere((element) => element.address == address);
+    Device foundDevice =
+        _deviceList.firstWhere((element) => element.address == address);
     if (foundDevice != null) {
       foundDevice.onMdsConnected(serial);
       notifyListeners();
@@ -86,7 +85,8 @@ class AppModel extends ChangeNotifier {
   }
 
   void _onDeviceDisconnected(String address) {
-    Device foundDevice = _deviceList.firstWhere((element) => element.address == address);
+    Device foundDevice =
+        _deviceList.firstWhere((element) => element.address == address);
     if (foundDevice != null) {
       foundDevice.onDisconnected();
       notifyListeners();

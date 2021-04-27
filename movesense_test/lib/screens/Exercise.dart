@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Color mainColor = Color(0xff195670);
 
-class Excercise extends StatelessWidget {
+class Exercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
