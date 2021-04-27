@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
-
-import 'package:movesense_test/services/library.dart';
-import 'package:movesense_test/services/data.dart';
+import 'package:movesense_test/services/Library.dart';
+import 'package:movesense_test/services/Data.dart';
 
 // import 'dart:developer' as developer;
 
@@ -84,22 +82,24 @@ class DeviceModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _onNewHrData(String data) async{
+  void _onNewHrData(String data) async {
     await getTime();
     _hrData = "";
     Map<String, dynamic> hrData = jsonDecode(data);
     Map<String, dynamic> body = hrData["Body"];
     double hr = body["average"];
     //int rr = body["rrData"][0];
-    Map<String,int> rrMap = { "rr" : body["rrData"][0],
-                            "time" : time};
+    Map<String, int> rrMap = {"rr": body["rrData"][0], "time": time};
     rrList.add(rrMap);
     //print(rrList.toString());
     print("Here is the data");
     print(rrList.toString());
     _data.rrDataAdd();
-    _hrData =
-        _hrData + "bpm: " + hr.toStringAsFixed(0) + " rr: " + rrList[0].toString();
+    _hrData = _hrData +
+        "bpm: " +
+        hr.toStringAsFixed(0) +
+        " rr: " +
+        rrList[0].toString();
 
     notifyListeners();
   }

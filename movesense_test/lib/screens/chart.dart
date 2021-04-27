@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'rr_chart.dart';
-import 'rr_series.dart';
+import '../Components/Rr_chart.dart';
+import '../Components/Rr_series.dart';
 
 class Chart extends StatelessWidget {
-  final List<RrSeries> data = [
-    RrSeries(
+  final List<RmssdSeries> data = [
+    RmssdSeries(
       time: "13:30",
-      rr: 550,
+      rmssd: 550,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "13:35",
-      rr: 678,
+      rmssd: 678,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "13:40",
-      rr: 283,
+      rmssd: 283,
       barColor: charts.ColorUtil.fromDartColor(Colors.red),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "13:45",
-      rr: 304,
+      rmssd: 304,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "13:50",
-      rr: 231,
+      rmssd: 231,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "13:55",
-      rr: 462,
+      rmssd: 462,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
-    RrSeries(
+    RmssdSeries(
       time: "14:00",
-      rr: 234,
+      rmssd: 234,
       barColor: charts.ColorUtil.fromDartColor(Colors.green),
     ),
   ];

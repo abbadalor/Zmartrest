@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:movesense_test/screens/Feedback.dart';
-import '../DeviceModel.dart';
 import 'package:provider/provider.dart';
-// import '../PlaceholderWidget.dart';
-import 'NavDrawer.dart';
-import 'Excercise.dart';
-import 'Eval.dart';
-import '../Device.dart';
-import '../AppModel.dart';
+import '../Components/DeviceModel.dart';
+import '../Components/NavDrawer.dart';
+import '../Screens/Chart.dart';
+import '../Screens/Exercise.dart';
+import '../Components/Device.dart';
+import '../Components/AppModel.dart';
 
 Color mainColor = Color(0xff195670);
 
@@ -85,15 +83,16 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 SizedBox(
                   height: 100.0,
-                  child: Excercise(),
+                  child: Exercise(),
                 ),
               ],
             ),
             Column(
               children: <Widget>[
-                SizedBox(
-                  height: 100.0,
-                  child: Eval(),
+                Expanded(
+                  child: Container(
+                    child: Chart(),
+                  ),
                 ),
               ],
             ),

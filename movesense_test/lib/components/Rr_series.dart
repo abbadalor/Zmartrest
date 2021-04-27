@@ -1,14 +1,14 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/foundation.dart';
 
-class RrSeries {
+class RmssdSeries {
   final String time;
-  final int rr;
+  final int rmssd;
   final charts.Color barColor;
 
-  RrSeries({
+  RmssdSeries({
     @required this.time,
-    @required this.rr,
+    @required this.rmssd,
     @required this.barColor,
   });
 }

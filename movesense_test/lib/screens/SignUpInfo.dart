@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';
-import 'package:movesense_test/services/library.dart';
+import 'package:movesense_test/services/Library.dart';
 
 class SignUpInfo extends StatefulWidget {
   @override

@@ -15,8 +15,8 @@ class NavDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
-                color: mainColor,
-                    ),
+              color: mainColor,
+            ),
           ),
           ListTile(
             leading: Icon(Icons.house),

@@ -1,12 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:movesense_test/services/library.dart';
-
+import 'package:movesense_test/services/Library.dart';
 
 class DataService {
-
   final fb = FirebaseDatabase.instance;
-
 
   //CollectionReference users = FirebaseFirestore.instance.collection('users');
 
@@ -32,6 +28,11 @@ class DataService {
     var date = DateTime.fromMicrosecondsSinceEpoch(rrList.last["time"]);
     var newdate = date.toString().replaceAll(".", "'");
     print(date);
-    ref.child('Users').child(userID).child("rrData").child(newdate).set(rrList.last["rr"].toString());
+    ref
+        .child('Users')
+        .child(userID)
+        .child("rrData")
+        .child(newdate)
+        .set(rrList.last["rr"].toString());
   }
 }

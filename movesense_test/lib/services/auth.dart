@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:movesense_test/services/library.dart';
-import 'package:movesense_test/services/data.dart';
+import 'package:movesense_test/services/Library.dart';
+import 'package:movesense_test/services/Data.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

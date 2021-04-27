@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'AppModel.dart';
+import 'Components/AppModel.dart';
 import 'package:provider/provider.dart';
-import 'screens/Login.dart';
-import 'screens/Connect.dart';
-import 'screens/SignUp.dart';
-import 'screens/SignUpInfo.dart';
+import 'package:movesense_test/screens/Login.dart';
+import 'package:movesense_test/screens/Connect.dart';
+import 'package:movesense_test/screens/SignUp.dart';
+import 'package:movesense_test/screens/SignUpInfo.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
