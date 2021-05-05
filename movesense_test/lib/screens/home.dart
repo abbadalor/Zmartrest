@@ -88,6 +88,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Expanded(
                   child: Container(

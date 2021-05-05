@@ -138,7 +138,7 @@ class DeviceModel extends ChangeNotifier {
   }
 
   void putTime() {
-    Mds.put(Mds.createRequestUri(_serial, "/Time"), '{"value":${realTime}}', (data, code) {
-    }, (e, c) => {});
+    Mds.put(Mds.createRequestUri(_serial, "/Time"), '{"value":${realTime}}',
+        (data, code) {}, (e, c) => {});
   }
 }
