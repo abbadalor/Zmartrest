@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
-import 'package:movesense_test/components/Device.dart';
-import 'package:movesense_test/components/DeviceConnectionStatus.dart';
-import 'package:movesense_test/components/DeviceModel.dart';
+import 'package:movesense_test/Components/Device.dart';
+import 'package:movesense_test/Components/DeviceConnectionStatus.dart';
 import 'package:movesense_test/screens/Home.dart';
 import 'package:movesense_test/Components/AppModel.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,7 +14,6 @@ class Connect extends StatefulWidget {
 }
 
 class _ConnectState extends State<Connect> {
-  final DeviceModel _deviceModel = DeviceModel();
   AppModel model;
   Color mainColor = Color(0xff195670);
   String headlineText = "Connect to a sensor";
@@ -26,7 +24,6 @@ class _ConnectState extends State<Connect> {
     initPlatformState();
     model = Provider.of<AppModel>(context, listen: false);
     model.onDeviceMdsConnected((device) => {
-          _deviceModel.putTime(),
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Home(device)))
         });
