@@ -20,7 +20,18 @@ class Chart extends StatelessWidget {
                     primaryXAxis: CategoryAxis(
                       labelPlacement: LabelPlacement.betweenTicks,
                       interval: 6,
+                      plotBands: <PlotBand>[
+                        PlotBand(
+                          isVisible: true,
+                          start: '14:35',
+                          end: '15:00',
+                          color: Colors.lightBlue.shade100,
+                          text: 'Gympass',
+                          textAngle: 0,
+                        ),
+                      ],
                     ),
+                    primaryYAxis: NumericAxis(visibleMaximum: 60),
                     series: <ChartSeries>[
                       // Initialize line series
                       ColumnSeries<RmssdData, String>(

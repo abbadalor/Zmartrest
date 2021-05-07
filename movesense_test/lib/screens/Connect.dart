@@ -94,9 +94,9 @@ class _ConnectState extends State<Connect> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/hrv.png',
-                width: 200,
-                height: 200,
+                'assets/logo.png',
+                width: 300,
+                height: 250,
               ),
               Text(
                 headlineText,
@@ -107,14 +107,25 @@ class _ConnectState extends State<Connect> {
                 ),
               ),
               _buildDeviceList(model.deviceList),
-              RaisedButton(
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 30.0),
+                child: FlatButton(
+                  child: Text(
+                    model.scanButtonText,
+                    style: TextStyle(
+                      fontSize: 17.5,
+                    ),
+                  ),
+                  color: mainColor,
+                  textColor: Colors.white,
+                  minWidth: double.infinity,
+                  height: 50,
                   onPressed: onScanButtonPressed,
-                  color: Colors.white,
-                  textColor: mainColor,
-                  child: Text(model.scanButtonText),
                   shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0))),
-              SizedBox(height: 10),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              )
             ],
           );
         },
