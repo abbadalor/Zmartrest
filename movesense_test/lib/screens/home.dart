@@ -5,8 +5,10 @@ import '../Components/DeviceModel.dart';
 import '../Components/NavDrawer.dart';
 import '../Screens/Chart.dart';
 import '../Screens/Exercise.dart';
+import '../Screens/Calendar.dart';
 import '../Components/Device.dart';
 import '../Components/AppModel.dart';
+
 
 Color mainColor = Color(0xff195670);
 
@@ -101,20 +103,6 @@ class _HomeState extends State<Home> {
           return Scaffold(
             appBar: AppBar(),
             drawer: NavDrawer(),
-            floatingActionButton: ButtonTheme(
-              minWidth: 100.0,
-              height: 40.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: RaisedButton(
-                child: Text(
-                  "Disconnect",
-                  style: TextStyle(color: mainColor),
-                ),
-                color: Colors.white,
-                onPressed: () => Navigator.pop(context),
-              ),
-            ),
             backgroundColor: Colors.white,
             body: _children[_currentIndex],
             bottomNavigationBar: BottomNavigationBar(
