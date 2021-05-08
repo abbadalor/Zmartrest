@@ -23,11 +23,13 @@ class Chart extends StatelessWidget {
                       plotBands: <PlotBand>[
                         PlotBand(
                           isVisible: true,
-                          start: '14:35',
+                          start: '13:30',
                           end: '15:00',
                           color: Colors.lightBlue.shade100,
                           text: 'Gympass',
                           textAngle: 0,
+                          verticalTextAlignment: TextAnchor.start,
+                          textStyle: TextStyle(color: Colors.black),
                         ),
                       ],
                     ),
@@ -47,6 +49,7 @@ class Chart extends StatelessWidget {
                             RmssdData('14:10', 28, Colors.green),
                             RmssdData('14:15', 34, Colors.green),
                             RmssdData('14:20', 32, Colors.green),
+                            RmssdData('14:25', 32, Colors.green),
                             RmssdData('14:30', 40, Colors.green),
                             RmssdData('14:35', 24, Colors.red),
                             RmssdData('14:40', 34, Colors.green),
