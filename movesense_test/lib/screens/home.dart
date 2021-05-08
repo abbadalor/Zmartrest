@@ -9,8 +9,9 @@ import '../Screens/Calendar.dart';
 import '../Components/Device.dart';
 import '../Components/AppModel.dart';
 
+
 Color mainColor = Color(0xff002e33);
-Color firstColor = Colors.grey[600];
+
 
 class Home extends StatefulWidget {
   final Device device;
@@ -119,21 +120,18 @@ class _HomeState extends State<Home> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.home,
-                    color: mainColor,
                   ),
                   label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.directions_run_rounded,
-                    color: mainColor,
                   ),
                   label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.autorenew_rounded,
-                    color: mainColor,
                   ),
                   label: '',
                 ),
@@ -177,7 +175,7 @@ class _HomeState extends State<Home> {
     return Switch(
       value: deviceModel.ledStatus,
       onChanged: (b) => {deviceModel.switchLed()},
-      activeTrackColor: mainColor,
+      activeTrackColor: Colors.white,
       activeColor: Colors.white,
     );
   }
