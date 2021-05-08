@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Components/DeviceModel.dart';
 import '../Components/NavDrawer.dart';
-import '../Screens/Chart.dart';
+import '../screens/chart.dart';
 import '../Screens/Exercise.dart';
 import '../Screens/Calendar.dart';
 import '../Components/Device.dart';

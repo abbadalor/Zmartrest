@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+List<RmssdData> chartData = [];
+
 class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,37 +39,7 @@ class Chart extends StatelessWidget {
                     series: <ChartSeries>[
                       // Initialize line series
                       ColumnSeries<RmssdData, String>(
-                          dataSource: [
-                            RmssdData('13:30', 35, Colors.green),
-                            RmssdData('13:35', 28, Colors.green),
-                            RmssdData('13:40', 34, Colors.green),
-                            RmssdData('13:45', 32, Colors.green),
-                            RmssdData('13:50', 40, Colors.red),
-                            RmssdData('13:55', 24, Colors.green),
-                            RmssdData('14:00', 34, Colors.green),
-                            RmssdData('14:05', 35, Colors.green),
-                            RmssdData('14:10', 28, Colors.green),
-                            RmssdData('14:15', 34, Colors.green),
-                            RmssdData('14:20', 32, Colors.green),
-                            RmssdData('14:25', 32, Colors.green),
-                            RmssdData('14:30', 40, Colors.green),
-                            RmssdData('14:35', 24, Colors.red),
-                            RmssdData('14:40', 34, Colors.green),
-                            RmssdData('14:45', 35, Colors.green),
-                            RmssdData('14:50', 28, Colors.green),
-                            RmssdData('14:55', 34, Colors.green),
-                            RmssdData('15:00', 32, Colors.green),
-                            RmssdData('15:05', 40, Colors.green),
-                            RmssdData('15:10', 24, Colors.green),
-                            RmssdData('15:15', 34, Colors.red),
-                            RmssdData('15:20', 35, Colors.red),
-                            RmssdData('15:25', 28, Colors.green),
-                            RmssdData('15:30', 34, Colors.green),
-                            RmssdData('15:35', 32, Colors.green),
-                            RmssdData('15:40', 40, Colors.green),
-                            RmssdData('15:45', 24, Colors.green),
-                            RmssdData('15:50', 34, Colors.green),
-                          ],
+                          dataSource: chartData,
                           xValueMapper: (RmssdData sales, _) => sales.time,
                           yValueMapper: (RmssdData sales, _) => sales.rmssd,
                           pointColorMapper: (RmssdData data, _) => data.color)
