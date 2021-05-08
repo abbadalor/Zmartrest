@@ -15,7 +15,7 @@ class Connect extends StatefulWidget {
 
 class _ConnectState extends State<Connect> {
   AppModel model;
-  Color mainColor = Color(0xff195670);
+  Color mainColor = Color(0xff002e33);
   String headlineText = "Connect to a sensor";
 
   @override
