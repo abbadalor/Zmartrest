@@ -9,7 +9,9 @@ import '../Screens/Calendar.dart';
 import '../Components/Device.dart';
 import '../Components/AppModel.dart';
 
-Color mainColor = Color(0xff195670);
+
+Color mainColor = Color(0xff002e33);
+
 
 class Home extends StatefulWidget {
   final Device device;
@@ -157,7 +159,7 @@ class _HomeState extends State<Home> {
             fontSize: 17.5,
           ),
         ),
-        color: Color(0xff195670),
+        color: mainColor,
         textColor: Colors.white,
         minWidth: double.infinity,
         height: 50,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color mainColor = Color(0xff195670);
+Color mainColor = Color(0xff002e33);
 
 class NavDrawer extends StatelessWidget {
   @override
