@@ -9,7 +9,6 @@ import '../Screens/Calendar.dart';
 import '../Components/Device.dart';
 import '../Components/AppModel.dart';
 
-
 Color mainColor = Color(0xff195670);
 
 class Home extends StatefulWidget {
@@ -64,19 +63,24 @@ class _HomeState extends State<Home> {
       child: Consumer<DeviceModel>(
         builder: (context, model, child) {
           final List<Widget> _children = [
-            //WIDGETS:
             Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                SizedBox(
-                  height: 100.0,
-                  child: _accelerometerItem(model),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 300),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 300,
+                    height: 250,
+                  ),
                 ),
                 SizedBox(
-                  height: 100.0,
+                  width: double.infinity,
+                  height: 50,
                   child: _hrItem(model),
                 ),
                 SizedBox(
-                  height: 100.0,
+                  height: 50,
                   child: _ledItem(model),
                 ),
               ],
@@ -143,132 +147,34 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget _accelerometerItem(DeviceModel deviceModel) {
-    String xyz = "";
-    try {
-      xyz = deviceModel.accelerometerData.split("\n")[0] +
-          " " +
-          deviceModel.accelerometerData.split("\n")[1] +
-          " " +
-          deviceModel.accelerometerData.split("\n")[2];
-      // xyz = deviceModel.accelerometerData;
-    } on RangeError catch (e) {
-      xyz = "";
-    }
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      color: mainColor,
-      child: ListTile(
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Icon(
-            Icons.directions_run_rounded,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
-        title: Text(
-          "Accelerometer",
-          style: TextStyle(color: Colors.white),
-        ),
-        subtitle: Text(
-          xyz,
-          style: TextStyle(color: Colors.white, fontSize: 14),
-        ),
-        trailing: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Text(deviceModel.accelerometerSubscribed
-              ? "Stop measuring"
-              : "Start measuring"),
-          onPressed: () => _onAccelerometerButtonPressed(deviceModel),
-        ),
-      ),
-    );
-  }
-
   Widget _hrItem(DeviceModel deviceModel) {
-    String bpm = "";
-    try {
-      bpm = "BPM: " + deviceModel.hrData.split(" ")[3];
-    } on RangeError catch (e) {
-      bpm = "";
-    }
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      color: mainColor,
-      child: ListTile(
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Icon(
-            Icons.favorite,
-            color: Colors.white,
-            size: 35,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
+      child: FlatButton(
+        child: Text(
+          deviceModel.hrSubscribed ? "Stop measuring" : "Start measuring",
+          style: TextStyle(
+            fontSize: 17.5,
           ),
         ),
-        title: Text(
-          "Heart rate",
-          style: TextStyle(color: Colors.white),
-        ),
-        subtitle: Text(
-          bpm,
-          style: TextStyle(color: Colors.white, fontSize: 14),
-        ),
-        trailing: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Text(
-              deviceModel.hrSubscribed ? "Stop measuring" : "Start measuring"),
-          onPressed: () => _onHrButtonPressed(deviceModel),
+        color: Color(0xff195670),
+        textColor: Colors.white,
+        minWidth: double.infinity,
+        height: 50,
+        onPressed: () => _onHrButtonPressed(deviceModel),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
   }
 
   Widget _ledItem(DeviceModel deviceModel) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      color: mainColor,
-      child: ListTile(
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Icon(
-            Icons.highlight,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
-        title: Text(
-          "Led",
-          style: TextStyle(color: Colors.white),
-        ),
-        trailing: Switch(
-          value: deviceModel.ledStatus,
-          onChanged: (b) => {deviceModel.switchLed()},
-          activeTrackColor: Colors.white,
-          activeColor: Colors.white,
-        ),
-      ),
+    return Switch(
+      value: deviceModel.ledStatus,
+      onChanged: (b) => {deviceModel.switchLed()},
+      activeTrackColor: Colors.white,
+      activeColor: Colors.white,
     );
   }
-
-//   Widget _temperatureItem(DeviceModel deviceModel) {
-//     return Card(
-//       color: mainColor,
-//       child: ListTile(
-//         title: Text("Temperature"),
-//         subtitle: Text(deviceModel.temperature),
-//         trailing: RaisedButton(
-//           child: Text("Get"),
-//           onPressed: () => deviceModel.getTemperature(),
-//         ),
-//       ),
-//     );
-//   }
 }
