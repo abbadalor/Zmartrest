@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
+import 'package:movesense_test/services/Library.dart';
 import 'package:movesense_test/services/Data.dart';
-import 'dart:math';
-import 'package:movesense_test/services/library.dart';
 
 // import 'dart:developer' as developer;
 
@@ -33,11 +31,6 @@ class DeviceModel extends ChangeNotifier {
 
   int _time = 0;
   int get time => _time;
-
-  int startTime = 0;
-  int oldRr = 0;
-  int oldTime = 0;
-  List<Map> tempRrList = List<Map>();
 
   DeviceModel(this._name, this._serial);
 
@@ -96,38 +89,17 @@ class DeviceModel extends ChangeNotifier {
     Map<String, dynamic> body = hrData["Body"];
     double hr = body["average"];
     //int rr = body["rrData"][0];
-    if (oldTime != 0) {
-      Map<String, int> rrMap = {"rr": pow((body["rrData"][0] - oldRr), 2), "time": oldTime};
-      print("getting rr value");
-      print(rrMap.toString());
-      print(rrList.toString());
-      rrList.add(rrMap);
-      print(rrList.toString());
-    }
-    if ((time - startTime) >= 30000000) {
-      print(time.toString() + " " + startTime.toString() + " " + (time - startTime).toString());
-      print("30 seconds has passed");
-      startTime = time;
-      rrList = tempRrList;
-      await _data.rrToRmssd();
-      print(rrList.toString());
-      tempRrList.clear();
-      print(rrList.toString());
-    }
-    oldRr = body["rrData"][0];
-    print("Changing time");
-    print(oldTime.toString());
-    oldTime = time;
-    print(oldTime.toString());
+    Map<String, int> rrMap = {"rr": body["rrData"][0], "time": time};
+    rrList.add(rrMap);
     //print(rrList.toString());
-    //print("Here is the data");
-    //print(rrList.toString());
-    //_data.rrDataAdd();
-    /*_hrData = _hrData +
+    print("Here is the data");
+    print(rrList.toString());
+    _data.rrDataAdd();
+    _hrData = _hrData +
         "bpm: " +
         hr.toStringAsFixed(0) +
         " rr: " +
-        rrList[0].toString();*/
+        rrList[0].toString();
 
     notifyListeners();
   }

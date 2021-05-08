@@ -1,10 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:movesense_test/screens/chart.dart';
-import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:intl/intl.dart';
-import 'package:movesense_test/services/library.dart';
-import 'package:movesense_test/screens/chart.dart';
+import 'package:movesense_test/services/Library.dart';
 
 class DataService {
   final fb = FirebaseDatabase.instance;
@@ -30,7 +25,7 @@ class DataService {
 
   Future rrDataAdd() async {
     final ref = fb.reference();
-    var date = rmssdList.last["time"];
+    var date = DateTime.fromMicrosecondsSinceEpoch(rrList.last["time"]);
     var newdate = date.toString().replaceAll(".", "'");
     print(date);
     ref
@@ -38,26 +33,6 @@ class DataService {
         .child(userID)
         .child("rrData")
         .child(newdate)
-        .set(rmssdList.last["rmssd"].toString());
-  }
-
-  Future rrToRmssd() async {
-    double rmssd = 0;
-    print("Rmssd data in list");
-    for (var i=0; i<rrList.length; i++) {
-      rmssd += rrList[i]["rr"];
-    }
-    rmssd = sqrt(rmssd / rrList.length);
-    print(rrList.toString());
-    Map<String, num> rmssdMap = {"rmssd": rmssd, "time": rrList[0]["time"]};
-    rmssdList.add(rmssdMap);
-    print("Rmssd data in list");
-    print(rmssdList.toString());
-    String minuteHourTime = DateFormat.Hm().format(DateTime.fromMicrosecondsSinceEpoch(rrList[0]["time"]));
-    print("adding chartData");
-    print(chartData.toString());
-    chartData.add(RmssdData(minuteHourTime, rmssd, Colors.green));
-    print(chartData.toString());
-    rrList.clear();
+        .set(rrList.last["rr"].toString());
   }
 }
