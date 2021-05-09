@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mdsflutter/Mds.dart';
-import 'package:movesense_test/services/Data.dart';
+import 'package:movesense_test/services/data.dart';
 import 'dart:math';
 import 'package:movesense_test/services/library.dart';
 
@@ -104,7 +104,7 @@ class DeviceModel extends ChangeNotifier {
       rrList.add(rrMap);
       print(rrList.toString());
     }
-    if ((time - startTime) >= 30000000) {
+    if ((time - startTime) >= 300000000) {
       print(time.toString() + " " + startTime.toString() + " " + (time - startTime).toString());
       print("30 seconds has passed");
       startTime = time;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:movesense_test/services/library.dart';
 
-List<RmssdData> chartData = [];
 
 class Chart extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class Chart extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
-                    Text("Rmssd", style: Theme.of(context).textTheme.bodyText2),
+                    Text(rmssdTest.toString(), style: Theme.of(context).textTheme.bodyText2),
               ),
               Expanded(
                 child: SfCartesianChart(
@@ -35,7 +35,7 @@ class Chart extends StatelessWidget {
                         ),
                       ],
                     ),
-                    primaryYAxis: NumericAxis(visibleMaximum: 60),
+                    primaryYAxis: NumericAxis(visibleMaximum: 100, visibleMinimum: 0),
                     series: <ChartSeries>[
                       // Initialize line series
                       ColumnSeries<RmssdData, String>(

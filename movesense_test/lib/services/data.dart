@@ -1,5 +1,4 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:movesense_test/screens/chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
@@ -58,6 +57,10 @@ class DataService {
     print(chartData.toString());
     chartData.add(RmssdData(minuteHourTime, rmssd, Colors.green));
     print(chartData.toString());
+    rmssdTest = [];
+    for (var i=0; i<chartData.length; i++) {
+      rmssdTest.add(chartData[i].rmssd);
+    }
     rrList.clear();
   }
 }
