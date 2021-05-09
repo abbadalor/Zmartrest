@@ -15,7 +15,7 @@ class Chart extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:
-                    Text(rmssdTest.toString(), style: Theme.of(context).textTheme.bodyText2),
+                    Text("Rmssd", style: Theme.of(context).textTheme.bodyText2),
               ),
               Expanded(
                 child: SfCartesianChart(
