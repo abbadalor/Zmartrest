@@ -42,7 +42,7 @@ class App extends StatelessWidget {
                     iconTheme: IconThemeData(color: Colors.black),
                   ),
                 ),
-                initialRoute: '/Connect',
+                initialRoute: '/',
                 routes: {
                   '/': (context) => Login(),
                   '/SignUpInfo': (context) => SignUpInfo(),

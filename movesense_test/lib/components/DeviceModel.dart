@@ -94,8 +94,6 @@ class DeviceModel extends ChangeNotifier {
     _hrData = "";
     Map<String, dynamic> hrData = jsonDecode(data);
     Map<String, dynamic> body = hrData["Body"];
-    double hr = body["average"];
-    //int rr = body["rrData"][0];
     if (oldTime != 0) {
       Map<String, int> rrMap = {"rr": pow((body["rrData"][0] - oldRr), 2), "time": oldTime};
       print("getting rr value");
@@ -106,7 +104,7 @@ class DeviceModel extends ChangeNotifier {
     }
     if ((time - startTime) >= 300000000) {
       print(time.toString() + " " + startTime.toString() + " " + (time - startTime).toString());
-      print("30 seconds has passed");
+      print("5 minutes has passed");
       startTime = time;
       rrList = tempRrList;
       await _data.rrToRmssd();

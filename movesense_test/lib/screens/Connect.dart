@@ -7,6 +7,7 @@ import 'package:movesense_test/screens/Home.dart';
 import 'package:movesense_test/Components/AppModel.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:movesense_test/services/auth.dart';
 
 class Connect extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _ConnectState extends State<Connect> {
   AppModel model;
   Color mainColor = Color(0xff195670);
   String headlineText = "Connect to a sensor";
+  final AuthService _auth = AuthService();
 
   @override
   void initState() {
@@ -131,7 +133,18 @@ class _ConnectState extends State<Connect> {
         },
       ),
       backgroundColor: Colors.white,
-      appBar: AppBar(),
+      appBar: AppBar(
+                title: const Text('Sample Code'),
+                leading: GestureDetector(
+                  onTap: () => {
+                    _auth.signOut(),
+                    Navigator.of(context).pop()
+                  },
+                  child: Icon(
+                    Icons.exit_to_app, // add custom icons also
+                  ),
+                ),
+      ),
     );
   }
 }

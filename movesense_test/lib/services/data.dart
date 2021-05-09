@@ -27,17 +27,17 @@ class DataService {
     //.catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future rrDataAdd() async {
+  Future rmssdDataAdd(num rmssd, num time) async {
     final ref = fb.reference();
-    var date = rmssdList.last["time"];
-    var newdate = date.toString().replaceAll(".", "'");
-    print(date);
+    //var date = rmssdList.last["time"];
+    //var newdate = date.toString().replaceAll(".", "'");
+    //print(date);
     ref
         .child('Users')
         .child(userID)
         .child("rrData")
-        .child(newdate)
-        .set(rmssdList.last["rmssd"].toString());
+        .child(time.toString())
+        .set(rmssd);
   }
 
   Future rrToRmssd() async {
@@ -49,13 +49,21 @@ class DataService {
     rmssd = sqrt(rmssd / rrList.length);
     print(rrList.toString());
     Map<String, num> rmssdMap = {"rmssd": rmssd, "time": rrList[0]["time"]};
+    rmssdDataAdd(rmssd, rrList[0]["time"]);
     rmssdList.add(rmssdMap);
     print("Rmssd data in list");
     print(rmssdList.toString());
     String minuteHourTime = DateFormat.Hm().format(DateTime.fromMicrosecondsSinceEpoch(rrList[0]["time"]));
     print("adding chartData");
     print(chartData.toString());
-    chartData.add(RmssdData(minuteHourTime, rmssd, Colors.green));
+    rmssd -= 25;
+    print(rmssd.toString());
+    if (rmssd >= 0) {
+      chartData.add(RmssdData(minuteHourTime, rmssd, Colors.green));
+    } else {
+      print(rmssd.abs().toString());
+      chartData.add(RmssdData(minuteHourTime, (rmssd.abs()), Colors.red));
+    }
     print(chartData.toString());
     rmssdTest = [];
     for (var i=0; i<chartData.length; i++) {

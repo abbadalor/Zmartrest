@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movesense_test/services/auth.dart';
 
 Color mainColor = Color(0xff002e33);
 
+
 class NavDrawer extends StatelessWidget {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -49,7 +52,12 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              _auth.signOut(),
+              Navigator.of(context).pop(),
+              Navigator.of(context).pop(),
+              Navigator.of(context).pop()
+            },
           ),
         ],
       ),
